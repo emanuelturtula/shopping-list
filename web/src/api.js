@@ -1,0 +1,27 @@
+async function request(path, options = {}) {
+  const res = await fetch(`/api${path}`, options);
+  const body = res.headers.get('content-type')?.includes('json') ? await res.json() : null;
+  if (!res.ok) throw new Error(body?.error || `Error ${res.status}`);
+  return body;
+}
+
+const json = (method, data) => ({
+  method,
+  headers: { 'content-type': 'application/json' },
+  body: JSON.stringify(data),
+});
+
+export const api = {
+  me: () => request('/me'),
+  products: () => request('/products'),
+  createProduct: (data) => request('/products', json('POST', data)),
+  updateProduct: (id, data) => request(`/products/${id}`, json('PATCH', data)),
+  uploadPhoto: (id, file) => {
+    const form = new FormData();
+    form.append('photo', file);
+    return request(`/products/${id}/photo`, { method: 'POST', body: form });
+  },
+};
+
+export const money = (n) =>
+  n == null ? '—' : n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });

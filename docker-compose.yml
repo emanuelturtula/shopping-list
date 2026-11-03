@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    image: shopping-list:latest
+    restart: unless-stopped
+    # Only reachable from the Raspberry itself; Cloudflare Tunnel is the way in.
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./data:/data

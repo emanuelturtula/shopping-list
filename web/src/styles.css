@@ -1,0 +1,31 @@
+:root {
+  --bg: #f6f7f5; --card: #fff; --text: #1d2420; --muted: #6b746f;
+  --accent: #1f7a4d; --border: #e1e5e2; --error: #b3261e;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #121614; --card: #1c211e; --text: #e8ece9; --muted: #9aa59f; --accent: #4cc38a; --border: #2c332f; --error: #f2b8b5; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+.app { max-width: 640px; margin: 0 auto; padding: 0 16px 32px; }
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 16px 0 8px; }
+h1 { font-size: 1.3rem; margin: 0; }
+.who { color: var(--muted); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; }
+nav { display: flex; gap: 8px; margin-bottom: 16px; }
+nav button { flex: 1; padding: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 10px; font-size: 1rem; }
+nav button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.add { display: flex; gap: 8px; margin-bottom: 12px; }
+.add input { flex: 1; min-width: 0; padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); font-size: 1rem; }
+.add .unit { flex: 0 0 90px; }
+.add button { padding: 10px 14px; border: 0; border-radius: 10px; background: var(--accent); color: #fff; font-size: 1rem; }
+.products { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.products li { display: flex; align-items: center; gap: 12px; padding: 8px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+.photo { width: 56px; height: 56px; flex: none; border-radius: 8px; background: var(--bg); display: grid; place-items: center; overflow: hidden; cursor: pointer; font-size: 1.4rem; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.info { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.info small { color: var(--muted); }
+.price { font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); text-align: center; padding: 24px 0; }
+.error { color: var(--error); }
