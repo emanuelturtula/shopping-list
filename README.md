@@ -9,6 +9,14 @@ cuánto va a salir la compra y cómo varían los precios con el tiempo.
 - `web/`: frontend en React + Vite, pensado para usar desde el celular.
 - Todo corre en un solo contenedor Docker en el puerto **8080**. Los datos (base y fotos) quedan en `./data` en el host.
 
+## Cómo se usa
+
+1. **Listas → Nueva lista.** Por defecto copia los productos y cantidades de la última lista; también se puede empezar vacía.
+2. Agregar productos escribiendo el nombre (si ya existe se reutiliza) y ajustar cantidades con − / +.
+3. En el súper, **Empezar a comprar** y en cada producto **Anotar precio** (precio por unidad, y si hubo promoción, cuál y el precio sin promo). El producto queda tildado.
+4. Arriba se ve el **estimado** (precio de hoy si ya se anotó; si no, el último precio sin promo) y lo **anotado**.
+5. Tocando un producto se ve su **historial de precios** y cuánto varió. La variación compara precios sin promo, para que una oferta puntual no parezca una baja.
+
 ## Usuarios
 
 No hay login propio. La app está detrás de **Cloudflare Access**, que pide un código por
@@ -28,7 +36,12 @@ cd server && npm install && DEV_USER_EMAIL=yo@ejemplo.com npm run dev
 cd web && npm install && npm run dev   # http://localhost:5173
 ```
 
-Tests: `cd server && npm test`.
+Tests (corren también en GitHub Actions en cada PR y en cada push a `master`):
+
+```sh
+cd server && npm test   # API y base de datos
+cd web && npm test      # pantallas (Vitest + Testing Library)
+```
 
 ## Producción (Raspberry)
 

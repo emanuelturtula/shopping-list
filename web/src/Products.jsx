@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api, money } from './api.js';
 
-export default function Products() {
+export default function Products({ onOpen }) {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState('');
   const [unit, setUnit] = useState('');
@@ -51,7 +51,7 @@ export default function Products() {
               <input type="file" accept="image/*" capture="environment" hidden
                 onChange={(e) => setPhoto(p, e.target.files[0])} />
             </label>
-            <div className="info">
+            <div className="info clickable" onClick={() => onOpen(p.id)}>
               <strong>{p.name}</strong>
               {p.unit && <small>{p.unit}</small>}
             </div>
