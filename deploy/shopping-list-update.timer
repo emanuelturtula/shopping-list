@@ -1,0 +1,9 @@
+[Unit]
+Description=Busca una nueva versión de la app de lista del súper cada minuto
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+
+[Install]
+WantedBy=timers.target

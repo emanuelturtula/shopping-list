@@ -1,0 +1,21 @@
+# Production stack on the Raspberry Pi. Lives in /opt/shopping-list (see deploy/README.md).
+# The app image is built by GitHub Actions on every merge to master; the update
+# timer pulls it and restarts the app.
+services:
+  app:
+    image: ghcr.io/emanuelturtula/shopping-list:latest
+    restart: unless-stopped
+    # Only reachable from the Pi itself. From outside, the way in is the tunnel.
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./data:/data
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?Falta TUNNEL_TOKEN en /opt/shopping-list/.env}
+    depends_on:
+      - app

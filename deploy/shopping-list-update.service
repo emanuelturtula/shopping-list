@@ -1,0 +1,8 @@
+[Unit]
+Description=Actualiza la app de lista del súper
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/shopping-list/update.sh

@@ -20,7 +20,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY server/ ./
 COPY --from=web /web/dist ./web
+RUN mkdir -p /data && chown node:node /data
 VOLUME /data
 EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+  CMD node -e "fetch('http://127.0.0.1:8080/api/health').then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"
 USER node
 CMD ["node", "src/index.js"]
