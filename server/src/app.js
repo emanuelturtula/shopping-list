@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { identify } from './auth.js';
+import { listsRouter } from './lists.js';
 
 const PHOTO_TYPES = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
 
@@ -77,6 +78,29 @@ export function createApp({ db, photosDir, webDir, devUserEmail }) {
     if (product.photo) fs.rmSync(path.join(photosDir, product.photo), { force: true });
     res.json(getProduct.get(product.id));
   });
+
+  // Price history, oldest first, with the change against the previous record.
+  api.get('/products/:id/prices', (req, res) => {
+    const product = getProduct.get(req.params.id);
+    if (!product) return res.status(404).json({ error: 'No existe' });
+    const rows = db.prepare(`
+      SELECT r.id, r.price, r.regular_price, r.promo, r.store, r.recorded_at, r.list_id,
+             u.name AS recorded_by
+      FROM price_records r LEFT JOIN users u ON u.id = r.recorded_by
+      WHERE r.product_id = ? ORDER BY r.recorded_at, r.id
+    `).all(product.id);
+    let prev = null;
+    const history = rows.map((r) => {
+      // Compare list prices, so a one-off promo doesn't look like deflation.
+      const base = r.regular_price ?? r.price;
+      const change = prev ? Math.round(((base - prev) / prev) * 1000) / 10 : null;
+      prev = base || prev;
+      return { ...r, change_pct: change };
+    });
+    res.json({ product, history });
+  });
+
+  api.use('/lists', listsRouter(db));
 
   app.use('/api', api);
   app.use('/photos', express.static(photosDir, { maxAge: '30d', immutable: true }));

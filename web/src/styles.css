@@ -29,3 +29,50 @@ nav button.active { background: var(--accent); border-color: var(--accent); colo
 .price { font-variant-numeric: tabular-nums; }
 .empty { color: var(--muted); text-align: center; padding: 24px 0; }
 .error { color: var(--error); }
+button { font: inherit; cursor: pointer; }
+.clickable { cursor: pointer; }
+.muted { color: var(--muted); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+button.primary { padding: 10px 14px; border: 0; border-radius: 10px; background: var(--accent); color: #fff; }
+button.primary.small { padding: 6px 10px; font-size: .9rem; }
+button.link { background: none; border: 0; color: var(--accent); padding: 6px 0; }
+button.link.danger { color: var(--error); }
+.new-list { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.new-list label { display: flex; gap: 8px; align-items: center; flex: 1; min-width: 0; color: var(--muted); }
+select, .list-head input, .price-form input:not([type=checkbox]) {
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); font-size: 1rem; min-width: 0;
+}
+.new-list select { flex: 1; }
+.rows { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }
+.rows > li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+.right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.badge { font-size: .75rem; padding: 2px 8px; border-radius: 99px; background: var(--bg); color: var(--muted); }
+.badge.shopping { background: var(--accent); color: #fff; }
+.list-head { display: grid; gap: 8px; margin: 4px 0 12px; }
+.list-head .title { font-size: 1.15rem; font-weight: 600; }
+.totals { display: flex; gap: 16px; align-items: center; }
+.totals > div { display: flex; flex-direction: column; flex: 1; }
+.totals strong { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.add .qty { flex: 0 0 64px; }
+.rows > li.item { flex-direction: column; align-items: stretch; gap: 6px; }
+.item.checked .info strong { text-decoration: line-through; color: var(--muted); }
+.item-main { display: flex; align-items: center; gap: 10px; }
+.item-main input[type=checkbox] { width: 22px; height: 22px; flex: none; accent-color: var(--accent); }
+.thumb { width: 44px; height: 44px; flex: none; border: 0; padding: 0; border-radius: 8px; background: var(--bg); overflow: hidden; display: grid; place-items: center; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.qty-ctl { display: flex; align-items: center; gap: 6px; }
+.qty-ctl button { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.qty-ctl span { min-width: 24px; text-align: center; font-variant-numeric: tabular-nums; }
+.item-foot { display: flex; align-items: center; gap: 12px; padding-left: 32px; }
+.item-foot .price { flex: 1; font-weight: 600; }
+.promo { color: #b26a00; }
+.price-form { display: grid; gap: 8px; padding: 8px 0 0 32px; }
+.price-form label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
+.price-form label.inline { display: flex; align-items: center; gap: 8px; color: var(--text); }
+.price-form .actions { display: flex; justify-content: flex-end; gap: 12px; }
+.product-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.product-head img { width: 88px; height: 88px; object-fit: cover; border-radius: 12px; }
+.product-head h2 { margin: 0; font-size: 1.2rem; }
+.up { color: var(--error); }
+.down { color: var(--accent); }
+@media (prefers-color-scheme: dark) { .promo { color: #f0b45a; } }

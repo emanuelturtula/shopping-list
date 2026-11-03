@@ -13,9 +13,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci
+      - name: Backend tests
         working-directory: server
-      - run: npm test
-        working-directory: server
-      - run: npm ci && npm run build
+        run: npm ci && npm test
+      - name: Frontend tests
         working-directory: web
+        run: npm ci && npm test
+      - name: Frontend build
+        working-directory: web
+        run: npm run build

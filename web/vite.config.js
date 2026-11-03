@@ -6,4 +6,8 @@ export default defineConfig({
   server: {
     proxy: { '/api': 'http://localhost:8080', '/photos': 'http://localhost:8080' },
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.js'],
+  },
 });
