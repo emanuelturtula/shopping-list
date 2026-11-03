@@ -43,8 +43,8 @@ cd server && npm test   # API y base de datos
 cd web && npm test      # pantallas (Vitest + Testing Library)
 ```
 
+Correr la imagen localmente: `docker compose up -d --build` (http://localhost:8080).
+
 ## Producción (Raspberry)
 
-```sh
-docker compose up -d --build
-```
+Cada merge a `master` se despliega solo en la Raspberry. Ver [deploy/README.md](deploy/README.md).
